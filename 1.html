@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic US Disease Map</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        svg {
+            width: 100%;
+            height: 600px;
+        }
+        .legend {
+            font-size: 12px;
+        }
+        .legend-rect {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Dynamic US Disease Map</h1>
+    <svg id="map"></svg>
+    <div style="text-align: center; margin-top: 20px;">
+        <span id="currentDate">Date: </span>
+        <input type="range" id="timeControl" min="0" max="0" step="1" value="0">
+    </div>
+   
+    <div id="legend" style="
+    position: absolute; 
+    top: 100px; 
+    right: 10px; 
+    background: white; 
+    padding: 15px; 
+    border: 1px solid #ccc; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    font-family: Arial, sans-serif; 
+    font-size: 14px;
+    line-height: 24px;
+">
+    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+        <div class="legend-color" style="background: #800026; width: 20px; height: 20px; margin-right: 10px; border-radius: 3px;"></div> 
+        > 100,000 cases
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+        <div class="legend-color" style="background: #BD0026; width: 20px; height: 20px; margin-right: 10px; border-radius: 3px;"></div> 
+        50,001 - 100,000 cases
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+        <div class="legend-color" style="background: #E31A1C; width: 20px; height: 20px; margin-right: 10px; border-radius: 3px;"></div> 
+        10,001 - 50,000 cases
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+        <div class="legend-color" style="background: #FC4E2A; width: 20px; height: 20px; margin-right: 10px; border-radius: 3px;"></div> 
+        5,001 - 10,000 cases
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+        <div class="legend-color" style="background: #FD8D3C; width: 20px; height: 20px; margin-right: 10px; border-radius: 3px;"></div> 
+        1,001 - 5,000 cases
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+        <div class="legend-color" style="background: #FEB24C; width: 20px; height: 20px; margin-right: 10px; border-radius: 3px;"></div> 
+        501 - 1,000 cases
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+        <div class="legend-color" style="background: #FED976; width: 20px; height: 20px; margin-right: 10px; border-radius: 3px;"></div> 
+        101 - 500 cases
+    </div>
+    <div style="display: flex; align-items: center;">
+        <div class="legend-color" style="background: #FFEDA0; width: 20px; height: 20px; margin-right: 10px; border-radius: 3px;"></div> 
+        ≤ 100 cases
+    </div>
+</div>
+
+
+    <script>
+        const svg = d3.select("#map");
+        const width = document.body.clientWidth;
+        const height = 600;
+
+        const projection = d3.geoAlbersUsa().translate([width / 2, height / 2]).scale(1000);
+        const path = d3.geoPath().projection(projection);
+
+        // Color scale
+        const colorScale = d3.scaleThreshold()
+            .domain([100, 500, 1000, 5000, 10000, 50000, 100000])
+            .range(["#FFEDA0", "#FEB24C", "#FD8D3C", "#FC4E2A", "#E31A1C", "#BD0026", "#800026"]);
+
+        // Load GeoJSON and data
+        const geojsonUrl = "us_states.geojson";
+        const diseaseDataUrl = "time_series_data.json";
+
+        Promise.all([
+            d3.json(geojsonUrl),
+            d3.json(diseaseDataUrl)
+        ]).then(([geojson, diseaseData]) => {
+            const timePoints = Object.keys(diseaseData);
+            const timeControl = document.getElementById("timeControl");
+            const currentDateLabel = document.getElementById("currentDate");
+
+            timeControl.max = timePoints.length - 1;
+
+            // Initialize map
+            svg.selectAll("path")
+                .data(geojson.features)
+                .join("path")
+                .attr("d", path)
+                .attr("stroke", "#000")
+                .attr("stroke-width", 0.5)
+                .attr("fill", "#ccc")
+                .append("title"); // Tooltip
+
+            // Update function
+            function updateMap(date) {
+                const currentData = diseaseData[date];
+
+                svg.selectAll("path")
+                    .data(geojson.features)
+                    .attr("fill", d => {
+                        const stateName = d.properties.NAME;
+                        const cases = currentData[stateName] || 0;
+                        return colorScale(cases);
+                    })
+                    .select("title")
+                    .text(d => {
+                        const stateName = d.properties.NAME;
+                        const cases = currentData[stateName] || 0;
+                        return `${stateName}: ${cases} cases`;
+                    });
+
+                currentDateLabel.textContent = `Date: ${date}`;
+            }
+
+            // Time control listener
+            timeControl.addEventListener("input", () => {
+                const date = timePoints[timeControl.value];
+                updateMap(date);
+            });
+
+            // Initial render
+            updateMap(timePoints[0]);
+        });
+    </script>
+</body>
+</html>
