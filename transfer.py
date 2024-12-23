@@ -29,4 +29,3 @@ def transfer_date():
 
 
 transfer_date()
-

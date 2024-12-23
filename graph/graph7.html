@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+                <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts.min.js"></script>
+
+</head>
+<body >
+    <div id="5efd0c3b142645d690d5516b6f3712f7" class="chart-container" style="width:900px; height:500px; "></div>
+    <script>
+        var chart_5efd0c3b142645d690d5516b6f3712f7 = echarts.init(
+            document.getElementById('5efd0c3b142645d690d5516b6f3712f7'), 'white', {renderer: 'canvas'});
+        var option_5efd0c3b142645d690d5516b6f3712f7 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "aria": {
+        "enabled": false
+    },
+    "color": [
+        "#5470c6",
+        "#91cc75",
+        "#fac858",
+        "#ee6666",
+        "#73c0de",
+        "#3ba272",
+        "#fc8452",
+        "#9a60b4",
+        "#ea7ccc"
+    ],
+    "series": [
+        {
+            "type": "funnel",
+            "name": "State",
+            "data": [
+                {
+                    "name": "North Dakota",
+                    "value": 2319
+                },
+                {
+                    "name": "Wyoming",
+                    "value": 1817
+                },
+                {
+                    "name": "Hawaii",
+                    "value": 1431
+                },
+                {
+                    "name": "District of Columbia",
+                    "value": 1340
+                },
+                {
+                    "name": "Alaska",
+                    "value": 1228
+                },
+                {
+                    "name": "Vermont",
+                    "value": 648
+                },
+                {
+                    "name": "Guam",
+                    "value": 362
+                },
+                {
+                    "name": "Virgin Islands",
+                    "value": 113
+                },
+                {
+                    "name": "Northern Mariana Islands",
+                    "value": 34
+                },
+                {
+                    "name": "American Samoa",
+                    "value": 30
+                }
+            ],
+            "sort": "ascending",
+            "gap": 0,
+            "label": {
+                "show": true,
+                "position": "inside",
+                "margin": 8,
+                "fontSize": 12
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "Vermont",
+                "Virgin Islands",
+                "Wyoming",
+                "Northern Mariana Islands",
+                "American Samoa",
+                "District of Columbia",
+                "Guam",
+                "Hawaii",
+                "Alaska",
+                "North Dakota"
+            ],
+            "selected": {},
+            "show": true,
+            "left": "center",
+            "top": "90%",
+            "orient": "horizontal",
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14,
+            "backgroundColor": "transparent",
+            "borderColor": "#ccc",
+            "borderRadius": 0,
+            "pageButtonItemGap": 5,
+            "pageButtonPosition": "end",
+            "pageFormatter": "{current}/{total}",
+            "pageIconColor": "#2f4554",
+            "pageIconInactiveColor": "#aaa",
+            "pageIconSize": 15,
+            "animationDurationUpdate": 800,
+            "selector": false,
+            "selectorPosition": "auto",
+            "selectorItemGap": 7,
+            "selectorButtonGap": 10
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "enterable": false,
+        "confine": false,
+        "appendToBody": false,
+        "transitionDuration": 0.4,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5,
+        "order": "seriesAsc"
+    },
+    "title": [
+        {
+            "show": true,
+            "text": "Funnel Chart - Least 10 deaths in U.S by state",
+            "target": "blank",
+            "subtarget": "blank",
+            "padding": 5,
+            "itemGap": 10,
+            "textAlign": "auto",
+            "textVerticalAlign": "auto",
+            "triggerEvent": false
+        }
+    ],
+    "toolbox": {
+        "show": true,
+        "orient": "horizontal",
+        "itemSize": 15,
+        "itemGap": 10,
+        "left": "80%",
+        "feature": {
+            "saveAsImage": {
+                "type": "png",
+                "backgroundColor": "auto",
+                "connectedBackgroundColor": "#fff",
+                "show": true,
+                "title": "\u4fdd\u5b58\u4e3a\u56fe\u7247",
+                "pixelRatio": 1
+            },
+            "restore": {
+                "show": true,
+                "title": "\u8fd8\u539f"
+            },
+            "dataView": {
+                "show": true,
+                "title": "\u6570\u636e\u89c6\u56fe",
+                "readOnly": false,
+                "lang": [
+                    "\u6570\u636e\u89c6\u56fe",
+                    "\u5173\u95ed",
+                    "\u5237\u65b0"
+                ],
+                "backgroundColor": "#fff",
+                "textareaColor": "#fff",
+                "textareaBorderColor": "#333",
+                "textColor": "#000",
+                "buttonColor": "#c23531",
+                "buttonTextColor": "#fff"
+            },
+            "dataZoom": {
+                "show": true,
+                "title": {
+                    "zoom": "\u533a\u57df\u7f29\u653e",
+                    "back": "\u533a\u57df\u7f29\u653e\u8fd8\u539f"
+                },
+                "icon": {},
+                "filterMode": "filter"
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar",
+                    "stack",
+                    "tiled"
+                ],
+                "title": {
+                    "line": "\u5207\u6362\u4e3a\u6298\u7ebf\u56fe",
+                    "bar": "\u5207\u6362\u4e3a\u67f1\u72b6\u56fe",
+                    "stack": "\u5207\u6362\u4e3a\u5806\u53e0",
+                    "tiled": "\u5207\u6362\u4e3a\u5e73\u94fa"
+                },
+                "icon": {}
+            }
+        }
+    }
+};
+        chart_5efd0c3b142645d690d5516b6f3712f7.setOption(option_5efd0c3b142645d690d5516b6f3712f7);
+    </script>
+</body>
+</html>
