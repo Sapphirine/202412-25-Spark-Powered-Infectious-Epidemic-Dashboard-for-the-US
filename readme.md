@@ -38,7 +38,46 @@
 	
 ```
 
+## Workflow
+
+![](./workflow.png)
 
 
 
+### Preprocess
 
+transfer.py
+
+check.py
+
+### Kafka Streaming
+
+zookeeper.py
+
+zookeeper.bat
+
+kafkaServer.py
+
+kafkaServer.bat
+
+kafkaProducer.py
+
+### Spark Analysis
+
+kafkaConsumer.py(for task 1 and 2)
+
+tasks.py(for other tasks)
+
+### Create Map and bar chart
+
+1.html (Dynamic US Disease Map)
+
+echart1-11.py (plot)
+
+### Code Integration and Visualization
+
+dashboard1.html
+
+## Video LInk
+
+https://www.youtube.com/watch?v=x7hAxZ9HaAQ
